@@ -1,169 +1,160 @@
 %
-% Make CNT's
+% To make CNT's see:
 % http://turin.nss.udel.edu/research/tubegenonline.html
-% post-process:
-% cut header
-% $ awk '{ print $2 " " $3 " " $4}' input.txt  > output.txt
+% To post-process the files see:
+% convert_cnt_coords.sh
+%
 
 clear;clc;
-% CNT = dlmread('cnt.xyz', ' ');
-% CNT = dlmread('longcnt.xyz', ' ');
-CNT = dlmread('midcnt.xyz', ' ');
+
+% CNT = dlmread('input_files/cnt.xyz', ' ');
+% CNT = dlmread('input_files/longcnt.xyz', ' ');
+% CNT = dlmread('input_files/midcnt.xyz', ' ');
+% CNT = dlmread('input_files/cappedcnt.xyz', ' ');
+% CNT = dlmread('input_files/gencnt.xyz', ' ');
+CNT = dlmread('input_files/c60.xyz', ' ');
 x = CNT(:,1);
 y = CNT(:,2);
 z = CNT(:,3);
 natoms = length(x);
 
-% marker size
-s = 1*ones(1,length(x))';
+[neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z);
 
-% subplot(2,2,1);
-hold on; grid on; view(40,35);
-xlim([-5 4]);
-ylim([-5 4]);
-zlim([-5 4]);
-scatter3(x,y,z,s,...
-        'MarkerEdgeColor','k',...
-        'MarkerFaceColor',[0 .75 .75]);
-    
-for i = 1:natoms
-    for j = 1:natoms
-        if i ~= j
-            neighbs(j,i) = sqrt((x(j)-x(i))^2 + ... 
-                              (y(j)-y(i))^2 + ... 
-                              (z(j)-z(i))^2);
-            neighbs(j,i) = round(neighbs(j,i), 4);
-        else
-            neighbs(j,i) = NaN;
-        end
-    end
-end
+pos_fig     = figure;
+ball_size   = 250;
+label_atoms = true;
+show_bonds  = true;
+dskin       = 2;
+plot_3d_structure(pos_fig,natoms,x,y,z, ...
+                  bonds,label_atoms,ball_size,show_bonds,dskin);
 
-bonds = zeros(natoms,natoms);
-for i = 1:natoms
-    nnindex = find(neighbs(i,:) == min(neighbs(i,:)));
-    for k = nnindex
-        line([x(i) x(k)], ...
-             [y(i) y(k)], ...
-             [z(i) z(k)], 'Color', 'red', 'LineWidth', 1);
-        mytxt = text(x(i),y(i),z(i),sprintf('%d',i));         
-        mytxt.Color = 'blue'; mytxt.FontSize = 16;
-        bonds(i,k) = 1;
-%          fprintf('Adding %d -> %d (%4.4f)\n', i , k, neighbs(i,k));         
-    end
-end
-   
-  
-% subplot(2,2,2);
-% image(bonds,'CDataMapping','scaled');
-% 
-% subplot(2,2,3);
-% image(neighbs,'CDataMapping','scaled'); colorbar;
+atom_graph = graph(bonds);
 
-mygraph = graph(bonds);
-% figure;plot(mygraph);
+% [fig_bonds,fig_neighbs,fig_graph] = plot_info(bonds,neighbs, atom_graph);
 
-firstnode = 2;
-% firstnode = 18;
-% firstnode = 24;
-N1 = firstnode;
-N2 = NaN(3,2);
-N3 = NaN(6,2);
+% first_node = 2;
+first_node = 18;
+% first_node = 24;
 
-N1 = neighbors(mygraph,firstnode);
-k=1;
-for i=1:length(N1)
-    nb2 = neighbors(mygraph,N1(i));
-    nb2 = nb2(nb2 ~= firstnode);
-%     fprintf("\nN2: i:%d, length of nb2: %d\n", i, length(nb2));
+[first_neighbors, ...
+ second_neighbors, ...
+ third_neighbors] = find_extended_neighbors(atom_graph, first_node);
 
-    if length(nb2) < 2
-        nb2 = [nb2; NaN];
-    end    
-    N2(i,:) = nb2;
-
-    disp(N2(i,:))
-
-    for j=1:length(N2(i,:))
-        disp(N2(i,j));
-        if isnan(N2(i,j)) == true
-%             fprintf('true\n %d');
-            N3(k,:) = [NaN NaN];
-        else
-            nb3 = neighbors(mygraph, N2(i,j));
-            nb3 = nb3(nb3 ~= N1(i));  
-%             fprintf("N3: k:%d, length of nb2: %d\n", k, length(nb3));   
-%             disp(nb3)
-            if length(nb3) < 2
-                nb3 = [nb3; NaN];
-            end
-    %         disp(nb3)
-            N3(k,:) = nb3;
-        end
-        k=k+1;
-    end
-    
-
-end
-
-rings = zeros(3,natoms);
-bitrings = zeros(3,natoms);
-count = 1;
-% fprintf("Loop:c-i-j-k:\n");
-for i=1:length(N1)
-    for j=1:2
-        for k=1:2
+% Find all connected 4-segments stemming from first node
+% Store all found segments in rings matrix
+segments  = zeros(3,natoms);
+five_seg  = zeros(3,natoms);
+six_seg   = zeros(3,natoms);
+seven_seg = zeros(3,natoms);
+counter   = 1; % Count of total found 4-segments
+for i=1:length(first_neighbors)
+    for j=1:2 % second_neighbor row counter
+        for k=1:2 % third_neighbor column counter
+            
+            % Each second_neighbor row has two atoms, for a total of 4
+            % third_neighbor atoms. The third_neighbor row counter should
+            % update every other k-loop.
             if j == 1
-                n3k = 2*i-1;
-%                 disp(N3(n3k,k));
+                n3k = 2*i-1; % third_neighbor row counter
             else
-                n3k = 2*i;
+                n3k = 2*i; % third_neighbor row counter
             end
-%             if N3(n3k,k) > 0 && N2(i,j) > 0
-%             if isnan(N3(n3k,k)) == false && isnan(N2(i,j)) == false
-%             if isnan(N2(i,j)) == false && N2(i,j) > 0
-%             if isnan(N3(n3k,k)) == false && N3(i,j) > 0
-            if isnan(N3(n3k,k)) == false 
-            if isnan(N2(i,j)) == false 
-                fprintf("Loop:%d-%d-%d-%d: %d -> %d -> %d -> %d\n", ... 
-                        count, i,j,k,firstnode, N1(i), N2(i,j), N3(n3k,k));
-                bitrings(count,[firstnode, N3(n3k,k)]) = 1;
-                rings(count,[firstnode, N1(i), N2(i,j) N3(n3k,k)]) = 1;
-                count = count+1;    
-            end
+            
+            if (isnan(third_neighbors(n3k,k)) == false) && (isnan(second_neighbors(i,j)) == false)
+                %fprintf("Loop:%d-%d-%d-%d: %d -> %d -> %d -> %d\n", ... 
+                %        counter, i,j,k, first_node, ...
+                %        first_neighbors(i), second_neighbors(i,j), third_neighbors(n3k,k));
+                seven_seg(counter, third_neighbors(n3k,k)) = 1;
+                six_seg(counter,[first_node, ...
+                                 third_neighbors(n3k,k)]) = 1;
+                five_seg(counter,[first_node, ...
+                                  second_neighbors(i,j), ...
+                                  third_neighbors(n3k,k)]) = 1;                             
+                segments(counter,[first_node, ...
+                                  first_neighbors(i), ...
+                                  second_neighbors(i,j), ...
+                                  third_neighbors(n3k,k)]) = 1;
+                counter = counter+1;    
             end
         end
     end
 end
 
+twopairs = nchoosek(1:counter-1, 2);
+five_rings  = [];
+six_rings   = [];
+seven_rings = [];
+for i=1:length(twopairs)
 
-twopair = nchoosek(1:count-1, 2);
-thispair = [];
-pairs = 0;
-for i=1:length(twopair)
-    fullrings(i) =  sum(bitand( ...
-                            bitrings(twopair(i,1),:), ...
-                            bitrings(twopair(i,2),:) ) );
-    if fullrings(i) == 2
-         thispair(end+1,:) = find(bitor( ...
-                            rings(twopair(i,1),:), ...
-                            rings(twopair(i,2),:) ));
-        pairs = pairs+1;
+    % 6-rings
+    % Find number of common nodes between all pairs of six_segments which
+    % only have at two nodes
+    six_pairs =  sum(bitand( ...
+                             six_seg(twopairs(i,1),:), ...
+                             six_seg(twopairs(i,2),:) ) );
+    % six_seg's with two nodes identical first and third neighbor nodes
+    % form a ring. Store the full node-member list of the ring.
+    if six_pairs == 2
+         six_rings(end+1,:) = find(bitor( ...
+                                          segments(twopairs(i,1),:), ...
+                                          segments(twopairs(i,2),:) ));
     end
+    
+%     if bonds( ) == 1
+%          six_rings(end+1,:) = find(bitor( ...
+%                                           segments(twopairs(i,1),:), ...
+%                                           segments(twopairs(i,2),:) ));
+%     end
+    
+    % 5-rings
+    five_pairs = sum(bitand( ...
+                             five_seg(twopairs(i,1),:), ...
+                             five_seg(twopairs(i,2),:) ) );                            
+    if five_pairs == 3
+        five_rings(end+1,:) = find(bitor( ...
+                                          segments(twopairs(i,1),:), ...
+                                          segments(twopairs(i,2),:) ));
+    end
+    
+    % 7-rings
+    s1 = find(seven_seg(twopairs(i,1),:))
+    s2 = find(seven_seg(twopairs(i,2),:))
+    if bonds(s1,s2) == 1
+            fprintf('match!\n');
+            segments(twopairs(i,1),:)
+            segments(twopairs(i,2),:)
+            bitor(segments(twopairs(i,1),:),segments(twopairs(i,2),:))
+            find(bitor(segments(twopairs(i,1),:),segments(twopairs(i,2),:)))
+          seven_rings(end+1,:) = find(bitor( ...
+                                             segments(twopairs(i,1),:), ...
+                                             segments(twopairs(i,2),:) ));
+    end
+
 end
 
-for i=1:pairs
+figure(pos_fig);
+[n6,~] = size(six_rings);
+for i=1:n6
     for j=1:6
-        scatter3(x(thispair(i,j)),y(thispair(i,j)),z(thispair(i,j)),250,...
+        scatter3(x(six_rings(i,j)),y(six_rings(i,j)),z(six_rings(i,j)),250,...
             'MarkerEdgeColor','k',...
-            'MarkerFaceColor',[1 1 1]);
+            'MarkerFaceColor',[0 .75 .75]);
     end
 end
-% image(rings,'CDataMapping','scaled');
-% figure;image(fullrings,'CDataMapping','scaled');
-% plot(fullrings);
 
+[n5,~] = size(five_rings);
+for i=1:n5
+    for j=1:5
+        scatter3(x(five_rings(i,j)),y(five_rings(i,j)),z(five_rings(i,j)),250,...
+            'MarkerEdgeColor','k',...
+            'MarkerFaceColor',[.49 1 .63]);
+    end
+end
 
-disp(thispair);
-
+fprintf('7-rings:');
+disp(six_rings);
+fprintf('6-rings:');
+disp(six_rings);
+fprintf('5-rings:');
+disp(five_rings);
 
