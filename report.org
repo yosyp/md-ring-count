@@ -1,0 +1,24 @@
+#+LaTeX_HEADER: \usepackage[parameters]{listings}
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \usepackage[english]{babel}
+#+LaTeX_HEADER: \usepackage{color} 
+#+LaTeX_HEADER: \usepackage[section]{placeins} 
+#+LaTeX_HEADER: \definecolor{mygreen}{RGB}{28,172,0} 
+#+LaTeX_HEADER: \definecolor{mylilas}{RGB}{170,55,241}
+#+LaTeX_CLASS_OPTIONS: [listings, listings-bw, listings-color, listings-sv]
+#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry}
+#+OPTIONS: toc:nil
+
+#+TITLE: Carbon Ring Analysis And Identification Of Defects In Carbon Nanotubes And Other Fullerenes
+#+AUTHOR: MSE 6270: Introduction to Atomistic Simulations @@latex:\\@@ Final Project @@latex:\\\\@@Yosyp Schwab
+#+EMAIL: ys4ea@virginia.edu
+#+DATE: May 6, 2018
+
+\begin{equation}
+n_{eq} = N exp \Bigg( - \frac{\epsilon_v^f}{k_b T} \Bigg)
+\end{equation}
+
+#+CAPTION: 
+#+NAME: fig:
+file:figures/
+
