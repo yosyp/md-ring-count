@@ -7,11 +7,11 @@
 
 clear;clc;
 
-% CNT = dlmread('input_files/cnt.xyz', ' ');
-% CNT = dlmread('input_files/longcnt.xyz', ' ');
-% CNT = dlmread('input_files/midcnt.xyz', ' ');
-% CNT = dlmread('input_files/cappedcnt.xyz', ' ');
-% CNT = dlmread('input_files/gencnt.xyz', ' ');
+% CNT = dlmread('../input_files/cnt.xyz', ' ');
+% CNT = dlmread('../input_files/longcnt.xyz', ' ');
+% CNT = dlmread('../input_files/midcnt.xyz', ' ');
+% CNT = dlmread('../input_files/cappedcnt.xyz', ' ');
+% CNT = dlmread('../input_files/gencnt.xyz', ' ');
 CNT = dlmread('input_files/c60.xyz', ' ');
 x = CNT(:,1);
 y = CNT(:,2);
