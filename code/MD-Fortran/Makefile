@@ -1,9 +1,10 @@
 # The makefile compiles (type make) and makes an executable called mse627
 EXEPATH = ..
-EXE = $(EXEPATH)/mse627
+EXE = $(EXEPATH)/runmd
 
-F90 = ifort
-F90FLAGS = -heap-arrays -Ofast -assume buffered_io -ipo
+#F90 = ifort
+#F90FLAGS = -heap-arrays -Ofast -assume buffered_io -ipo
+F90 = gfortran
 #F90FLAGS = -g -check all -fpe0 -warn -traceback -debug extended
 LDFLAGS = 
 
