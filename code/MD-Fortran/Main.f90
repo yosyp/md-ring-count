@@ -80,9 +80,10 @@ program MD
         call Load_EAM("potentials/Mishin_CuAg.tab")
     elseif(KEYBS == 3) then
         NTYPE = 2                   ! Number of particle types
-        call EF1_TF(1,1,1)          ! Si
-        call EF1_TF(2,2,2)          ! Ge
-        call EF1_TF(3,1,2)          ! Si-Ge
+        call EF1_TF(1,3,3)          ! Cc
+!        call EF1_TF(1,1,1)          ! Si
+!        call EF1_TF(2,2,2)          ! Ge
+!        call EF1_TF(3,1,2)          ! Si-Ge
     else
         write(*,*) "KEYBS = ", KEYBS, " is not defined. Program will stop."
         stop

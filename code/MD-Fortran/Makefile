@@ -1,5 +1,5 @@
 # The makefile compiles (type make) and makes an executable called mse627
-EXEPATH = ..
+EXEPATH = ../md-runs/
 EXE = $(EXEPATH)/runmd
 
 #F90 = ifort

@@ -17,26 +17,26 @@ subroutine EF1_TF(KTEF,KE1,KE2)
     integer, intent(in) :: KTEF, KE1, KE2
 
     integer, parameter :: Np = 8192
-    character*2, parameter :: Element(2) = (/'Si','Ge'/)
-    real*8, parameter :: mass_TF(2) = (/28.0855d0, 72.64d0/)
-    real*8, parameter :: TSF_A(2) = (/1830.8d0, 1769.0d0/)      !Parameter A
-    real*8, parameter :: TSF_B(2) = (/471.18d0, 419.23d0/)      !Parameter B
+    character*2, parameter :: Element(3) = (/'Si','Ge','Cc'/)
+    real*8, parameter :: mass_TF(3) = (/28.0855d0, 72.64d0, 12.0107d0/)
+    real*8, parameter :: TSF_A(3) = (/1830.8d0, 1769.0d0, 1393.6d0/)      !Parameter A
+    real*8, parameter :: TSF_B(3) = (/471.18d0, 419.23d0, 346.74d0/)      !Parameter B
 !   Constants in /A
-    real*8, parameter :: TSF_lamda1(2) = (/2.4799d0, 2.4451d0/) !Parameter lamda
-    real*8, parameter :: TSF_lamda2(2) = (/1.7322d0, 1.7047d0/) !Parameter mu 
+    real*8, parameter :: TSF_lamda1(3) = (/2.4799d0, 2.4451d0, 3.4879d0/) !Parameter lamda
+    real*8, parameter :: TSF_lamda2(3) = (/1.7322d0, 1.7047d0, 2.2119d0/) !Parameter mu 
 !   Parameters: 
     real*8, parameter :: TSF_KSI(3) = (/1.0d0, 1.0d0, 1.00061d0/) !Parameter Kai   
     real*8, parameter :: TSF_WIJ(3) = (/1.0d0, 1.0d0, 1.0d0/)   !Parameter w
-    real*8, parameter :: TSF_Bet(2) = (/1.1d-06, 9.0166d-07/)   !Parameter beta
-    real*8, parameter :: TSF_C(2) = (/1.0039d5, 1.0643d5/)      !Parameter c
-    real*8, parameter :: TSF_D(2) = (/16.217d0, 15.652d0/)      !Parameter d
-    real*8, parameter :: TSF_H(2) = (/-0.59825d0, -0.43884d0/)  !Parameter h
-    real*8, parameter :: TSF_N(2) = (/0.78734d0, 0.75627d0/)    !Parameter n
+    real*8, parameter :: TSF_Bet(3) = (/1.1d-06, 9.0166d-07, 1.5724d-07/)   !Parameter beta
+    real*8, parameter :: TSF_C(3) = (/1.0039d5, 1.0643d5, 3.8049d4/)      !Parameter c
+    real*8, parameter :: TSF_D(3) = (/16.217d0, 15.652d0, 4.384d0/)      !Parameter d
+    real*8, parameter :: TSF_H(3) = (/-0.59825d0, -0.43884d0, -0.57058d0/)  !Parameter h
+    real*8, parameter :: TSF_N(3) = (/0.78734d0, 0.75627d0, 0.72751d0/)    !Parameter n
 !   Cutoff distance
 !   Req + one eighth the distance between second neighbor
-    real*8, parameter :: TSF_RC(2) = (/2.7d0, 2.8d0/) 
+    real*8, parameter :: TSF_RC(3) = (/2.7d0, 2.8d0, 1.8d0/) 
 !   Req + seven eighth the distance between second neighbor
-    real*8, parameter :: TSF_SC(2) = (/3.0d0, 3.1d0/)
+    real*8, parameter :: TSF_SC(3) = (/3.0d0, 3.1d0, 2.1d0/)
 
     integer :: i
     real*8 :: A, B, RC, SC, TF_C, TF_D, TF_H, TF_KSI, TF_WIJ
