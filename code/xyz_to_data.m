@@ -7,7 +7,8 @@ clear;clc;
 % CNT = dlmread('../input_files/gencnt.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/c60.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/nanotube_carbon_lattice.xyz', ' ', 2, 1);
-CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+CNT = dlmread('../input_files/1defect_cnt-33-1110.xyz', ' ', 2, 1);
 
 % bond_length = 1.4210;
 % bond_length = 1.334205;
@@ -21,7 +22,7 @@ x = x+abs(min(x));
 y = y+abs(min(y));
 z = z+abs(min(z));
 
-fID = fopen('md-runs/cnt.data', 'w');
+fID = fopen('md-runs/1defect_cnt.data', 'w');
 
 % Line 1: <#-of-atoms> <time>
 fprintf(fID, '%d 0\n', natoms);

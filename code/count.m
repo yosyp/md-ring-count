@@ -4,7 +4,6 @@
 % To post-process the files see:
 % convert_cnt_coords.sh
 %
-
 clear;clc;
 
 % CNT = dlmread('../input_files/cnt.xyz', ' ', 2, 1);
@@ -14,29 +13,73 @@ clear;clc;
 % CNT = dlmread('../input_files/gencnt.xyz', ' ', 2, 1);
 % CNT = dlmread('input_files/c60.xyz', ' ');
 % CNT = dlmread('../input_files/cnt-33-112.xyz', ' ', 2, 1);
-CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/cnt-33-1110-defect.xyz', ' ', 2, 1);
+CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
 x = CNT(:,1);
 y = CNT(:,2);
 z = CNT(:,3);
 natoms = length(x);
 
-%  x = x+abs(min(x));
-%  y = y+abs(min(y));
-%  z = z+abs(min(z));
+% CNT = importdata('md-runs/data/time00100.d');
+% % CNT = importdata('md-runs/equilibration_data/time00001.d');
+% x = CNT(:,3);
+% y = CNT(:,4);
+% z = CNT(:,5);
+% natoms = length(x);
 
 [neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z);
 
-pos_fig     = figure;
+pos_fig     = figure('Position', [1000 100 500 1200]);
 ball_size   = 250;
-label_atoms = true;
+label_atoms = false;
 show_bonds  = true;
-dskin       = 2;
+dskin       = 0;
 plot_3d_structure(pos_fig,natoms,x,y,z, ...
                   bonds,label_atoms,ball_size,show_bonds,dskin);
 
 atom_graph = graph(bonds);
 
+% figure(pos_fig);
+% ax = gca;
+% ax.CameraTargetMode = 'manual';
+% ax.CameraTarget = [ mean(x) mean(y) mean(z) ];
+% ax.CameraViewAngleMode = 'manual';
+% ax.CameraViewAngle = 90;
+% for theta=0:-.1:-2*pi
+%     ax.CameraPositionMode = 'manual';
+%     ax.CameraPosition = [ mean(x)+5*cos(theta) mean(y)+5*sin(theta) mean(z)+1 ];    
+%     ax.XLim = [min(z) max(z)];
+%     ax.YLim = [min(z) max(z)];
+%     ax.ZLim = [min(z) max(z)];
+% 
+%     ax.Projection = 'orthographic';
+%     grid off;
+%     ax.Color = 'none';
+%     ax.Visible = 'off';
+%     drawnow;
+%     pause(.04);
+% end
+
+% figure(pos_fig);
+% ax = gca;
+% ax.CameraPositionMode = 'manual';
+% ax.CameraPosition = [ mean(x) mean(y) mean(z)+0 ];
+% ax.CameraViewAngleMode = 'manual';
+% ax.CameraViewAngle = 120;
+% for theta=0:-.1:-2*pi
+%     ax.CameraTargetMode = 'manual';
+%     ax.CameraTarget = [ 1*cos(theta)-mean(x) 1*sin(theta)+mean(y) mean(z)+0 ];
+%     ax.XLim = [min(z) max(z)];
+%     ax.YLim = [min(z) max(z)];
+%     ax.ZLim = [min(z) max(z)];
+%     ax.Projection = 'orthographic';
+%     drawnow;
+%     pause(.04);
+% end
+
+
+
+%%
 % [fig_bonds,fig_neighbs,fig_graph] = plot_info(bonds,neighbs, atom_graph);
 
 % first_node = 2;
