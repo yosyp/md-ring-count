@@ -7,12 +7,15 @@
 
 clear;clc;
 
-% CNT = dlmread('../input_files/cnt.xyz', ' ');
-% CNT = dlmread('../input_files/longcnt.xyz', ' ');
-% CNT = dlmread('../input_files/midcnt.xyz', ' ');
-% CNT = dlmread('../input_files/cappedcnt.xyz', ' ');
-% CNT = dlmread('../input_files/gencnt.xyz', ' ');
-CNT = dlmread('input_files/c60.xyz', ' ');
+% CNT = dlmread('../input_files/cnt.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/longcnt.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/midcnt.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cappedcnt.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/gencnt.xyz', ' ', 2, 1);
+% CNT = dlmread('input_files/c60.xyz', ' ');
+% CNT = dlmread('../input_files/cnt-33-112.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+CNT = dlmread('../input_files/cnt-33-1110-defect.xyz', ' ', 2, 1);
 x = CNT(:,1);
 y = CNT(:,2);
 z = CNT(:,3);

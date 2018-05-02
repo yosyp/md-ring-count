@@ -22,3 +22,14 @@ n_{eq} = N exp \Bigg( - \frac{\epsilon_v^f}{k_b T} \Bigg)
 #+NAME: fig:
 file:figures/
 
+* References
+
+- Tersoff potential parameters
+https://arxiv.org/ftp/arxiv/papers/1003/1003.2236.pdf
+
+- Stone-Wales defect
+
+- Simulation paper
+https://www.sciencedirect.com/science/article/pii/S0921452609014379
+
+
