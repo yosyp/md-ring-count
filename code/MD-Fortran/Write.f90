@@ -9,18 +9,21 @@ subroutine WriteSnapshot()
     real*8 :: T, E_tot
     
     itime = anint(time)
+    write(*,*) "itime is=", itime
     if(Itime < 1000) Then
-        write(chtime, FMT='(I3.3)') itime
+        write(chtime, FMT='(I5.5)') itime
     elseif(Itime < 10000) Then
-        write(chtime, FMT='(I4.4)') itime
+        write(chtime, FMT='(I5.5)') itime
     elseif(Itime < 100000) Then
         write(chtime, FMT='(I5.5)') itime
     else
         write(*,*) "Simulation is too long... time = ", time, " ps."
         stop
     endif
+    write(*,*) "trim(chtime) is=", trim(chtime)
     
-    open(newunit = file_id, FILE='./'//trim(OutDir)//'/time'//trim(chtime)//'.d')
+    ! open(newunit = file_id, FILE='./'//trim(OutDir)//'/time'//trim(chtime)//'.d')
+    open(newunit = file_id, FILE='./'//trim(OutDir)//'/time'//chtime//'.d')
     do i = 1, Natoms
         T = Ek(i)*ENUNIT*2.0d0/(BK*dim)
         E_tot = (Ep(i) + Ek(i))*ENUNIT

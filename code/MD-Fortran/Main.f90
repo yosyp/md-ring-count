@@ -91,6 +91,19 @@ program MD
 
     call SetInit()                  ! defining some initial parameters
     call WriteInit()                ! writing initial output before MD
+
+! DEBUG
+    time = 10*NWRITE-1
+    call WriteSnapshot()
+    call WriteRestart()    
+    time = 0
+    write(*,*) "Wrote inital snapshots and time is reset now to t=", TIME
+! END DEBUG
+
+    write(*,*) "NWRITE=", NWRITE
+    write(*,*) "NEPRT=", NEPRT
+
+
     if(KFLAG == 2) call Vel()
 
 !   Beginning of MD loop
@@ -121,6 +134,7 @@ program MD
         if(mod(step,NWRITE) == 0) then
             call WriteSnapshot()
             call WriteRestart()
+            write(*,*) "WROTE TO FILE! time = ", time
         endif
 
         time = time + dt

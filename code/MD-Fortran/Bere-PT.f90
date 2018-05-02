@@ -5,7 +5,7 @@
 !   MSE 6270, Leonid Zhigilei
 subroutine BERE_P 
     use GlobalVars
-    real*8, parameter :: pbeta = 0.1d0!pbeta = 0.005d0
+    real*8, parameter :: pbeta = 0.1d-01!pbeta = 0.005d0
     real*8 :: dzeta(3), P_tot, P(3) 
     integer :: i
     

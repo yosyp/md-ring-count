@@ -9,10 +9,17 @@ clear;clc;
 % CNT = dlmread('../input_files/nanotube_carbon_lattice.xyz', ' ', 2, 1);
 CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
 
+% bond_length = 1.4210;
+% bond_length = 1.334205;
+bond_length = 1.2321/2;
 x = CNT(:,1);
 y = CNT(:,2);
 z = CNT(:,3);
 natoms = length(x);
+
+x = x+abs(min(x));
+y = y+abs(min(y));
+z = z+abs(min(z));
 
 fID = fopen('md-runs/cnt.data', 'w');
 
@@ -21,12 +28,15 @@ fprintf(fID, '%d 0\n', natoms);
 
 % Line 2: <system size x,y,z>
 fprintf(fID, '%4.4f %4.4f %4.4f\n', ...
-        abs(min(x)) + max(x), ...
-        abs(min(y)) + max(y), ...
-        abs(min(z)) + max(z));
+             max(x)+30*bond_length, ...
+             max(y)+30*bond_length, ...
+             max(z)+2*bond_length);
 
 % Line 3: <system center>
-fprintf(fID, '0 0 0\n');
+fprintf(fID, '%4.4f %4.4f %4.4f\n', ...
+             max(x)/2, ... 
+             max(y)/2, ... 
+             max(z)/2);
 
 % Line 4: Type of each particle
 for i=1:natoms
