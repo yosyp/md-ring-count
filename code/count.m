@@ -25,7 +25,7 @@ natoms = length(x);
 % x = CNT(:,3);
 % y = CNT(:,4);
 % z = CNT(:,5);
-% natoms = length(x);
+natoms = length(x);
 
 [neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z);
 

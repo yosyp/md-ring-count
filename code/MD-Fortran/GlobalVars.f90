@@ -16,6 +16,7 @@ module GlobalVars
     integer, allocatable :: NNG(:), NNNG(:,:)       !number of neighbours, and neighbour list
     real*8, allocatable :: RhoDen(:)                !electron density, used for EAM
     
+    real*8 :: ZDI                                   !Store maximum z value of initial system (used for STRETCHING())    
     real*8 :: CellSize(3), CellCenter(3)            !the size of the computational cell, and position of the cell center
     real*8 :: mass(KTMX)                            !mass of atoms
     real*8 :: time, T0, P0, dt                      !time, default temperature, default pressure, timeste
