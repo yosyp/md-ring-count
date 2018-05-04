@@ -119,6 +119,8 @@ program MD
         if(KFLAG == 3) call Heating()
 !       Using the Berendsen thermostat in the stochastic region
         if(KFLAG == 5) call Bere_T()
+!       Stretching using custom subrouting by scaling z-direction
+        if(KFLAG == 6) call Stretching()
 !       Berendsen barostat for constant pressure simulation
         if(LFLAG == 1) call Bere_P()
 
