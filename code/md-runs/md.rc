@@ -1,5 +1,5 @@
 UNIT 14 md.input       old
-UNIT 15 1defect_cnt.data       old
+UNIT 15 test_cnt.data       old
 UNIT 16 simcnt.data    unknown
 UNIT 17 simcnt.out     unknown
 *DIR 01 data           dirname
