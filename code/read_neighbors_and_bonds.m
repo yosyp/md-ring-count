@@ -14,8 +14,12 @@
 % Outputs:
 %       neighbs interatomic distances between all pairs <sq-matrix>
 %       bonds nearest neighbors connected graph <sq-matrix>
+%       bond_lengths 1D vector of all bond lengths used for atomic pairs
 %
-function [neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z)
+function [neighbs, bonds, bond_lengths] = ...
+                                 read_neighbors_and_bonds(natoms, x, y, z)
+                             
+    bond_lengths = []; 
     for i = 1:natoms
         for j = 1:natoms
             if i ~= j
@@ -41,14 +45,16 @@ function [neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z)
         % form a fully connected graph
         for k = 1:2
             bonds(i,idx(k)) = 1;
+            bond_lengths = [bond_lengths out(k)];
         end
         
         % If the system is heterogeneus with 5-6-7-rings, then all three
         % nearest neighbors are sometimes necessary to form a fully
         % connected graph. There is a cutoff (10%) to make sure non-nearest
         % neighbors are not connected.
-        if out(3) < 1.1*out(2)
+        if out(3) < 1.3*out(2)
             bonds(i,idx(3)) = 1;
+            bond_lengths = [bond_lengths out(3)];
         end
     end
 end
