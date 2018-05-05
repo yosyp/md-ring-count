@@ -32,4 +32,19 @@ https://arxiv.org/ftp/arxiv/papers/1003/1003.2236.pdf
 - Simulation paper
 https://www.sciencedirect.com/science/article/pii/S0921452609014379
 
+- Nanotube:
+1. Open ends -- ring count
+2. Both ends capped -- ring count
+3. Open ends + 1 atom missing 
+   equilibration
+   @ NPT heating STP
+   @ NPT heating 3000 K
+4. Open ends + 1 atom added
+   equilibration
+   @ NPT heating STP
+   @ NPT heating 3000 K
+5. Open ends + Stretching
+   equilibration
+   @ NPT heating STP
+   @ NPT heating 3000 K
 
