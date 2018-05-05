@@ -14,30 +14,34 @@ clear;clc;
 % CNT = dlmread('input_files/c60.xyz', ' ');
 % CNT = dlmread('../input_files/cnt-33-112.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/cnt-33-1110-defect.xyz', ' ', 2, 1);
-CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
-x = CNT(:,1);
-y = CNT(:,2);
-z = CNT(:,3);
-natoms = length(x);
+% CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+% x = CNT(:,1);
+% y = CNT(:,2);
+% z = CNT(:,3);
+% natoms = length(x);
 
 % CNT = importdata('md-runs/data/time00100.d');
 % % CNT = importdata('md-runs/equilibration_data/time00001.d');
-% x = CNT(:,3);
-% y = CNT(:,4);
-% z = CNT(:,5);
+CNT = importdata('md-runs/data/time00035.d');
+
+% using time00035.d bonds 101 and 88 do not form???
+x = CNT(:,3);
+y = CNT(:,4);
+z = CNT(:,5);
 natoms = length(x);
 
-[neighbs, bonds] = read_neighbors_and_bonds(natoms, x, y, z);
+[neighbs, bonds, bond_lengths] = read_neighbors_and_bonds(natoms, x, y, z);
 
 pos_fig     = figure('Position', [1000 100 500 1200]);
 ball_size   = 250;
-label_atoms = false;
+label_atoms = true;
 show_bonds  = true;
 dskin       = 0;
 plot_3d_structure(pos_fig,natoms,x,y,z, ...
                   bonds,label_atoms,ball_size,show_bonds,dskin);
 
 atom_graph = graph(bonds);
+figure;histogram(bond_lengths)
 
 % figure(pos_fig);
 % ax = gca;
