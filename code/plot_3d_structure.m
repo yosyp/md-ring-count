@@ -30,9 +30,9 @@ function plot_3d_structure(fig_handle,natoms,x,y,z, ...
     grid on;
     view(40,35);
     
-    xlim([min(x)-dskin max(x)+dskin]);
-    ylim([min(y)-dskin max(y)+dskin]);
-    zlim([min(z)-dskin max(z)+dskin]);
+%     xlim([min(x)-dskin max(x)+dskin]);
+%     ylim([min(y)-dskin max(y)+dskin]);
+%     zlim([min(z)-20*(max(x)/max(z)) max(z)+20*(max(x)/max(z))]);
     
     scatter3(x,y,z,s,...
             'MarkerEdgeColor','k',...
@@ -48,7 +48,7 @@ function plot_3d_structure(fig_handle,natoms,x,y,z, ...
             if show_bonds
                 line([x(i) x(k)], ...
                      [y(i) y(k)], ...
-                     [z(i) z(k)], 'Color', 'red', 'LineWidth', 1);
+                     [z(i) z(k)], 'Color', 'red', 'LineWidth', 3);
             end
             if label_atoms
                 mytxt = text(x(i),y(i),z(i),sprintf('%d',i));         
