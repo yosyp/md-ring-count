@@ -1,0 +1,208 @@
+ DEBUG:Found initial length of system: ZDI=   23.4107000000000     
+ DEBUG:Wrote inital snapshots and time is reset now to t=
+  0.000000000000000E+000
+ DEBUG:status output frequency NWRITE=       10000
+ DEBUG:file output frequency NEPRT=        5000
+ Step =            0 Time =   0.000000000000000E+000 Cell length = 
+   23.4112852675000     
+ Step =        10000 Time =   0.999999999999906      Cell length = 
+   23.5283387675000     
+ Step =        20000 Time =    1.99999999999980      Cell length = 
+   23.6453922675000     
+ Step =        30000 Time =    3.00000000000191      Cell length = 
+   23.7624457675000     
+ Step =        40000 Time =    4.00000000000402      Cell length = 
+   23.8794992675000     
+ Step =        50000 Time =    5.00000000000169      Cell length = 
+   23.9965527675000     
+ Step =        60000 Time =    5.99999999999936      Cell length = 
+   24.1136062675000     
+ Step =        70000 Time =    6.99999999999702      Cell length = 
+   24.2306597674999     
+ Step =        80000 Time =    7.99999999999469      Cell length = 
+   24.3477132674999     
+ Step =        90000 Time =    8.99999999999236      Cell length = 
+   24.4647667674999     
+ Step =       100000 Time =    9.99999999999003      Cell length = 
+   24.5818202674999     
+ Step =       110000 Time =    10.9999999999877      Cell length = 
+   24.6988737674999     
+ Step =       120000 Time =    11.9999999999854      Cell length = 
+   24.8159272674999     
+ Step =       130000 Time =    12.9999999999830      Cell length = 
+   24.9329807674999     
+ Step =       140000 Time =    13.9999999999807      Cell length = 
+   25.0500342674999     
+ Step =       150000 Time =    14.9999999999784      Cell length = 
+   25.1670877674999     
+ Step =       160000 Time =    15.9999999999760      Cell length = 
+   25.2841412674999     
+ Step =       170000 Time =    16.9999999999737      Cell length = 
+   25.4011947674999     
+ Step =       180000 Time =    17.9999999999714      Cell length = 
+   25.5182482674999     
+ Step =       190000 Time =    18.9999999999691      Cell length = 
+   25.6353017674999     
+ Step =       200000 Time =    19.9999999999667      Cell length = 
+   25.7523552674999     
+ Step =       210000 Time =    20.9999999999644      Cell length = 
+   25.8694087674999     
+ Step =       220000 Time =    21.9999999999621      Cell length = 
+   25.9864622674999     
+ Step =       230000 Time =    22.9999999999597      Cell length = 
+   26.1035157674999     
+ Step =       240000 Time =    23.9999999999574      Cell length = 
+   26.2205692674999     
+ Step =       250000 Time =    24.9999999999551      Cell length = 
+   26.3376227674999     
+ Step =       260000 Time =    25.9999999999527      Cell length = 
+   26.4546762674999     
+ Step =       270000 Time =    26.9999999999504      Cell length = 
+   26.5717297674999     
+ Step =       280000 Time =    27.9999999999481      Cell length = 
+   26.6887832674999     
+ Step =       290000 Time =    28.9999999999458      Cell length = 
+   26.8058367674999     
+ Step =       300000 Time =    29.9999999999434      Cell length = 
+   26.9228902674999     
+ Step =       310000 Time =    30.9999999999411      Cell length = 
+   27.0399437674999     
+ Step =       320000 Time =    31.9999999999388      Cell length = 
+   27.1569972674999     
+ Step =       330000 Time =    32.9999999999720      Cell length = 
+   27.2740507674999     
+ Step =       340000 Time =    34.0000000000052      Cell length = 
+   27.3911042674999     
+ Step =       350000 Time =    35.0000000000383      Cell length = 
+   27.5081577674999     
+ Step =       360000 Time =    36.0000000000715      Cell length = 
+   27.6252112674999     
+ Step =       370000 Time =    37.0000000001047      Cell length = 
+   27.7422647674999     
+ Step =       380000 Time =    38.0000000001379      Cell length = 
+   27.8593182674999     
+ Step =       390000 Time =    39.0000000001711      Cell length = 
+   27.9763717674999     
+ Step =       400000 Time =    40.0000000002043      Cell length = 
+   28.0934252674999     
+ Step =       410000 Time =    41.0000000002375      Cell length = 
+   28.2104787674999     
+ Step =       420000 Time =    42.0000000002707      Cell length = 
+   28.3275322674999     
+ Step =       430000 Time =    43.0000000003039      Cell length = 
+   28.4445857674999     
+ Step =       440000 Time =    44.0000000003371      Cell length = 
+   28.5616392674999     
+ Step =       450000 Time =    45.0000000003703      Cell length = 
+   28.6786927674999     
+ Step =       460000 Time =    46.0000000004035      Cell length = 
+   28.7957462674999     
+ Step =       470000 Time =    47.0000000004367      Cell length = 
+   28.9127997674999     
+ Step =       480000 Time =    48.0000000004699      Cell length = 
+   29.0298532674999     
+ Step =       490000 Time =    49.0000000005031      Cell length = 
+   29.1469067674999     
+ Step =       500000 Time =    50.0000000005363      Cell length = 
+   29.2639602674999     
+ Step =       510000 Time =    51.0000000005695      Cell length = 
+   29.3810137674999     
+ Step =       520000 Time =    52.0000000006027      Cell length = 
+   29.4980672674999     
+ Step =       530000 Time =    53.0000000006359      Cell length = 
+   29.6151207674999     
+ Step =       540000 Time =    54.0000000006691      Cell length = 
+   29.7321742674999     
+ Step =       550000 Time =    55.0000000007023      Cell length = 
+   29.8492277674999     
+ Step =       560000 Time =    56.0000000007355      Cell length = 
+   29.9662812674999     
+ Step =       570000 Time =    57.0000000007687      Cell length = 
+   30.0833347674999     
+ Step =       580000 Time =    58.0000000008019      Cell length = 
+   30.2003882674998     
+ Step =       590000 Time =    59.0000000008351      Cell length = 
+   30.3174417674998     
+ Step =       600000 Time =    60.0000000008683      Cell length = 
+   30.4344952674998     
+ Step =       610000 Time =    61.0000000009015      Cell length = 
+   30.5515487674998     
+ Step =       620000 Time =    62.0000000009347      Cell length = 
+   30.6686022674997     
+ Step =       630000 Time =    63.0000000009679      Cell length = 
+   30.7856557674997     
+ Step =       640000 Time =    64.0000000010010      Cell length = 
+   38.2369234428855     
+ Step =       650000 Time =    65.0000000010342      Cell length = 
+   44.2671192495013     
+ Step =       660000 Time =    66.0000000010674      Cell length = 
+   49.4460272084127     
+ Step =       670000 Time =    67.0000000011006      Cell length = 
+   53.4453856559883     
+ Step =       680000 Time =    68.0000000011338      Cell length = 
+   56.7758018190535     
+ Step =       690000 Time =    69.0000000011670      Cell length = 
+   59.6926876030218     
+ Step =       700000 Time =    70.0000000012002      Cell length = 
+   61.9938080974792     
+ Step =       710000 Time =    71.0000000012334      Cell length = 
+   64.0519840471472     
+ Step =       720000 Time =    72.0000000012666      Cell length = 
+   65.7229301459264     
+ Step =       730000 Time =    73.0000000012998      Cell length = 
+   67.2632373576104     
+ Step =       740000 Time =    74.0000000013330      Cell length = 
+   68.6084989219925     
+ Step =       750000 Time =    75.0000000013662      Cell length = 
+   69.7329091641999     
+ Step =       760000 Time =    76.0000000013994      Cell length = 
+   70.8408622079418     
+ Step =       770000 Time =    77.0000000014326      Cell length = 
+   71.8945784945658     
+ Step =       780000 Time =    78.0000000014658      Cell length = 
+   72.8166634152145     
+ Step =       790000 Time =    79.0000000014990      Cell length = 
+   73.6636739026764     
+ Step =       800000 Time =    80.0000000015322      Cell length = 
+   74.4730019262751     
+ Step =       810000 Time =    81.0000000015654      Cell length = 
+   75.2620316979235     
+ Step =       820000 Time =    82.0000000015986      Cell length = 
+   76.0365123024797     
+ Step =       830000 Time =    83.0000000016318      Cell length = 
+   76.7981935226527     
+ Step =       840000 Time =    84.0000000016650      Cell length = 
+   77.5471453902470     
+ Step =       850000 Time =    85.0000000016982      Cell length = 
+   78.2821327827512     
+ Step =       860000 Time =    86.0000000017314      Cell length = 
+   79.0003728789205     
+ Step =       870000 Time =    87.0000000017646      Cell length = 
+   79.6982809305003     
+ Step =       880000 Time =    88.0000000017978      Cell length = 
+   80.3729248265805     
+ Step =       890000 Time =    89.0000000018310      Cell length = 
+   81.0236956486844     
+ Step =       900000 Time =    90.0000000018642      Cell length = 
+   81.6536743056885     
+ Step =       910000 Time =    91.0000000018973      Cell length = 
+   82.2870361386143     
+ Step =       920000 Time =    92.0000000019305      Cell length = 
+   83.0234456720759     
+ Step =       930000 Time =    93.0000000019637      Cell length = 
+   83.7482402281802     
+ Step =       940000 Time =    94.0000000019969      Cell length = 
+   84.4515552290067     
+ Step =       950000 Time =    95.0000000020301      Cell length = 
+   85.1270816979262     
+ Step =       960000 Time =    96.0000000020633      Cell length = 
+   85.7737086324205     
+ Step =       970000 Time =    97.0000000020965      Cell length = 
+   86.3965611858366     
+ Step =       980000 Time =    98.0000000021297      Cell length = 
+   87.0057282116827     
+ Step =       990000 Time =    99.0000000021629      Cell length = 
+   87.7404867908583     
+ Step =      1000000 Time =    100.000000002196      Cell length = 
+   88.4752928442414     
+ The total CPU time =    166.568327000000     
