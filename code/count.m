@@ -7,14 +7,17 @@
 clear;clc;
 
 % CNT = dlmread('../input_files/cnt.xyz', ' ', 2, 1);
-% CNT = dlmread('../input_files/longcnt.xyz', ' ', 2, 1);
-% CNT = dlmread('../input_files/midcnt.xyz', ' ', 2, 1);
-% CNT = dlmread('../input_files/cappedcnt.xyz', ' ', 2, 1);
-% CNT = dlmread('../input_files/gencnt.xyz', ' ', 2, 1);
-% CNT = dlmread('input_files/c60.xyz', ' ');
+% CNT = dlmread('../input_files/longcnt.xyz', ' ');
+% CNT = dlmread('../input_files/midcnt.xyz', ' ');
+% CNT = dlmread('../input_files/cappedcnt.xyz', ' ');
+% CNT = dlmread('../input_files/gencnt.xyz', ' ');
+% CNT = dlmread('../input_files/c60.xyz');
 % CNT = dlmread('../input_files/cnt-33-112.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/cnt-33-1110-defect.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-1010-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-170-1110.xyz', ' ', 2, 1);
+% 
 % x = CNT(:,1);
 % y = CNT(:,2);
 % z = CNT(:,3);
@@ -22,48 +25,88 @@ clear;clc;
 
 % CNT = importdata('md-runs/data/time00100.d');
 % % CNT = importdata('md-runs/equilibration_data/time00001.d');
-CNT = importdata('md-runs/data/time00035.d');
-
-% using time00035.d bonds 101 and 88 do not form???
+CNT = importdata('md-runs/rigid-170/stretch_data/time00047.d');
 x = CNT(:,3);
 y = CNT(:,4);
 z = CNT(:,5);
 natoms = length(x);
 
 [neighbs, bonds, bond_lengths] = read_neighbors_and_bonds(natoms, x, y, z);
+% figure;histogram(bond_lengths)
 
 pos_fig     = figure('Position', [1000 100 500 1200]);
 ball_size   = 250;
-label_atoms = true;
+label_atoms = false;
 show_bonds  = true;
 dskin       = 0;
 plot_3d_structure(pos_fig,natoms,x,y,z, ...
                   bonds,label_atoms,ball_size,show_bonds,dskin);
 
+% bonds = (bonds + bonds')/2;              
 atom_graph = graph(bonds);
-figure;histogram(bond_lengths)
 
-% figure(pos_fig);
-% ax = gca;
-% ax.CameraTargetMode = 'manual';
-% ax.CameraTarget = [ mean(x) mean(y) mean(z) ];
-% ax.CameraViewAngleMode = 'manual';
-% ax.CameraViewAngle = 90;
-% for theta=0:-.1:-2*pi
-%     ax.CameraPositionMode = 'manual';
-%     ax.CameraPosition = [ mean(x)+5*cos(theta) mean(y)+5*sin(theta) mean(z)+1 ];    
-%     ax.XLim = [min(z) max(z)];
-%     ax.YLim = [min(z) max(z)];
-%     ax.ZLim = [min(z) max(z)];
+%     fig_graph = figure;
+%         h=plot(atom_graph);
+%         title('Undirected Graph of System');
+%         xt = get(gca, 'XTick'); set(gca, 'FontSize', 16); set(gca, 'LineWidth', 2);        
+% highlight(h,[23,24],'NodeColor','g','EdgeColor','g','MarkerSize',15,'LineWidth',4)
+% highlight(h,[35,24],'NodeColor','g','EdgeColor','g','MarkerSize',15,'LineWidth',4)
+% highlight(h,[25,24],'NodeColor','g','EdgeColor','g','MarkerSize',15,'LineWidth',4)
 % 
-%     ax.Projection = 'orthographic';
-%     grid off;
-%     ax.Color = 'none';
-%     ax.Visible = 'off';
-%     drawnow;
-%     pause(.04);
-% end
+% highlight(h,[35,36],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% highlight(h,[35,34],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% highlight(h,[25,26],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% highlight(h,[25,14],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% highlight(h,[23,12],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% highlight(h,[23,22],'NodeColor','r','EdgeColor','r','MarkerSize',15,'LineWidth',4)
+% 
+% highlight(h,[34,33],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[22,33],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[22,21],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[12,13],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[12,11],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[14,13],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[14,15],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[26,27],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[26,37],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
+% highlight(h,[36,37],'NodeColor','k','EdgeColor','k','MarkerSize',15,'LineWidth',4)
 
+
+figure(pos_fig);
+% axis tight manual % this ensures that getframe() returns a consistent size
+filename = 'testAnimated34asdasdfsadfadssadf22.gif';
+ax = gca;
+ax.CameraTargetMode = 'manual';
+ax.CameraTarget = [ mean(x) mean(y) mean(z) ];
+ax.CameraViewAngleMode = 'manual';
+ax.CameraViewAngle = 100;
+theta = 0;
+for theta=0:-.02:-2*pi
+    ax.CameraPositionMode = 'manual';
+    ax.CameraPosition = [ mean(x)+5*cos(theta) mean(y)+5*sin(theta) mean(z)+0 ];    
+    ax.XLim = [min(z)-5 max(z)+5];
+    ax.YLim = [min(z)-5 max(z)+5];
+    ax.ZLim = [min(z)-5 max(z)+5];
+
+    ax.Projection = 'orthographic';
+    grid off;
+    ax.Color = 'none';
+    ax.Visible = 'off';
+    drawnow;
+      % Capture the plot as an image 
+      frame = getframe(pos_fig); 
+      im = frame2im(frame); 
+      [imind,cm] = rgb2ind(im,256); 
+
+      % Write to the GIF File 
+      if theta == 0
+          imwrite(imind,cm,filename,'gif', 'Loopcount',inf,'DelayTime',0); 
+      else 
+          imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',0); 
+      end     
+%     pause(.04);
+end
+%%
 % figure(pos_fig);
 % ax = gca;
 % ax.CameraPositionMode = 'manual';
@@ -85,9 +128,9 @@ figure;histogram(bond_lengths)
 
 %%
 % [fig_bonds,fig_neighbs,fig_graph] = plot_info(bonds,neighbs, atom_graph);
-
+%%
 % first_node = 2;
-first_node = 18;
+first_node = 24;
 % first_node = 24;
 
 [first_neighbors, ...
@@ -115,9 +158,12 @@ for i=1:length(first_neighbors)
             end
             
             if (isnan(third_neighbors(n3k,k)) == false) && (isnan(second_neighbors(i,j)) == false)
-                %fprintf("Loop:%d-%d-%d-%d: %d -> %d -> %d -> %d\n", ... 
-                %        counter, i,j,k, first_node, ...
-                %        first_neighbors(i), second_neighbors(i,j), third_neighbors(n3k,k));
+%                 fprintf("Loop:%d-%d-%d-%d: %d -> %d -> %d -> %d\n", ... 
+%                        counter, i,j,k, first_node, ...
+%                        first_neighbors(i), second_neighbors(i,j), third_neighbors(n3k,k));
+                fprintf("Connected Segment: %d -> %d -> %d -> %d\n", ... 
+                        first_node, ...
+                       first_neighbors(i), second_neighbors(i,j), third_neighbors(n3k,k));
                 seven_seg(counter, third_neighbors(n3k,k)) = 1;
                 six_seg(counter,[first_node, ...
                                  third_neighbors(n3k,k)]) = 1;
@@ -133,7 +179,7 @@ for i=1:length(first_neighbors)
         end
     end
 end
-
+%%
 twopairs = nchoosek(1:counter-1, 2);
 five_rings  = [];
 six_rings   = [];

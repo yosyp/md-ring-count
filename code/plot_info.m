@@ -15,11 +15,22 @@ function [fig_bonds,fig_neighbs,fig_graph] = ...
 
     fig_bonds = figure;
         image(bonds,'CDataMapping','scaled');
+        title('Adjacency Matrix of Bonds');
+        xlabel('Atom #', 'FontWeight', 'bold', 'Color', 'black');
+        ylabel('Atom #', 'FontWeight', 'bold', 'Color', 'black');
+        xt = get(gca, 'XTick'); set(gca, 'FontSize', 16); set(gca, 'LineWidth', 2);
         
     fig_neighbs = figure;
-        image(neighbs,'CDataMapping','scaled');    
+        image(neighbs,'CDataMapping','scaled');   
+        title('Nearest Neighbor Distance (darker=shorter)');
+        xlabel('Atom #', 'FontWeight', 'bold', 'Color', 'black');
+        ylabel('Atom #', 'FontWeight', 'bold', 'Color', 'black');
+        xt = get(gca, 'XTick'); set(gca, 'FontSize', 16); set(gca, 'LineWidth', 2);        
     
     fig_graph = figure;
         plot(atom_graph);
+        title('Undirected Graph of System');
+        xt = get(gca, 'XTick'); set(gca, 'FontSize', 16); set(gca, 'LineWidth', 2);        
+    highlight(atom_graph,24,'NodeColor','g','EdgeColor','g')
 
 end

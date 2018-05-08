@@ -3,24 +3,47 @@ clear;clc;
 % CNT = dlmread('../input_files/cnt.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/longcnt.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/midcnt.xyz', ' ', 2, 1);
-% CNT = dlmread('../input_files/cappedcnt.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cappedcnt.xyz', ' ');
 % CNT = dlmread('../input_files/gencnt.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/c60.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/nanotube_carbon_lattice.xyz', ' ', 2, 1);
-CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-33-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-40-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-60-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-170-1110.xyz', ' ', 2, 1);
+% CNT = dlmread('../input_files/cnt-1010-1110.xyz', ' ', 2, 1);
 % CNT = dlmread('../input_files/1defect_cnt-33-1110.xyz', ' ', 2, 1);
+
+% CNT = importdata('md-runs/data/time00100.d');
+% % CNT = importdata('md-runs/equilibration_data/time00001.d');
+CNT = importdata('md-runs/free-capped/equil_data/time00500.d');
+x = CNT(:,3);
+y = CNT(:,4);
+z = CNT(:,5);
+
+x(101) = [];
+y(101) = [];
+z(101) = [];
+natoms = length(x);
+
+
+% x = CNT(:,1);
+% y = CNT(:,2);
+% z = CNT(:,3);
+% natoms = length(x);
+
+% x=x(1:end-1);
+% y=y(1:end-1);
+% z=z(1:end-1);
 
 % bond_length = 1.4210;
 % bond_length = 1.334205;
 bond_length = 1.2321/2;
-x = CNT(:,1);
-y = CNT(:,2);
-z = CNT(:,3);
-natoms = length(x);
 
 x = x+abs(min(x));
 y = y+abs(min(y));
 z = z+abs(min(z));
+
 
 % For carbon nanotube stretching only:
 % Need to set the first few lattice widths at the top and bottom of the
@@ -36,7 +59,7 @@ rz(4) = min(z);
 rz(5) = min(z(z>min(z)));
 rz(6) = min(z(z>min(z(z>min(z)))));
 
-fID = fopen('md-runs/test_cnt.data', 'w');
+fID = fopen('md-runs/free_defect_cnt.data', 'w');
 
 % Line 1: <#-of-atoms> <time>
 fprintf(fID, '%d 0\n', natoms);
@@ -61,12 +84,12 @@ fprintf(fID, '\n');
 
 % Line 5: khist, x, y, z
 for i=1:natoms
-    if any(rz(:) == z(i))
-        fprintf(fID, '3 %4.4f %4.4f %4.4f ', x(i), y(i), z(i));  
-        fprintf('found rigid! %4.4f\n', z(i));
-    else
+%     if any(rz(:) == z(i))
+%         fprintf(fID, '3 %4.4f %4.4f %4.4f ', x(i), y(i), z(i));  
+%         fprintf('found rigid! %4.4f\n', z(i));
+%     else
         fprintf(fID, '0 %4.4f %4.4f %4.4f ', x(i), y(i), z(i));
-    end
+%     end
 end
 fprintf(fID, '\n');
 

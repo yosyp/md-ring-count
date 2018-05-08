@@ -44,8 +44,10 @@ function [neighbs, bonds, bond_lengths] = ...
         % In a homogeneus n-ring system only connecting two neighors will
         % form a fully connected graph
         for k = 1:2
-            bonds(i,idx(k)) = 1;
-            bond_lengths = [bond_lengths out(k)];
+            if neighbs(i, idx(k)) < 1.806
+                bonds(i,idx(k)) = 1;
+                bond_lengths = [bond_lengths out(k)];
+            end
         end
         
         % If the system is heterogeneus with 5-6-7-rings, then all three
@@ -53,8 +55,10 @@ function [neighbs, bonds, bond_lengths] = ...
         % connected graph. There is a cutoff (10%) to make sure non-nearest
         % neighbors are not connected.
         if out(3) < 1.3*out(2)
-            bonds(i,idx(3)) = 1;
-            bond_lengths = [bond_lengths out(3)];
+            if neighbs(i, idx(3)) < 1.806            
+                bonds(i,idx(3)) = 1;
+                bond_lengths = [bond_lengths out(3)];
+            end
         end
     end
 end
